@@ -12,7 +12,7 @@ set SERVER_IP=127.0.0.1
 set SERVER_PORT=2222
 
 :: --- Direktori aplikasi di server ---
-set "REMOTE_DIR=C:\laragon\www\nte-app"
+set "REMOTE_DIR=C:\laragon\www\website-cdk\nte-app"
 
 :: --- Branch yang di-deploy ---
 set BRANCH=main
@@ -123,6 +123,6 @@ if errorlevel 1 (
 echo.
 echo ======================================================
 echo  DEPLOYMENT BERHASIL!
-echo  URL Server : http://%SERVER_IP%/nte-app (sesuaikan)
+echo  URL Server : http://%SERVER_IP%/website-cdk/nte-app (sesuaikan)
 echo ======================================================
 pause

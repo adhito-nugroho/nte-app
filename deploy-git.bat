@@ -23,7 +23,7 @@ set "REMOTE_GIT=C:\laragon\bin\git\cmd\git.exe"
 set "REPO_URL=https://github.com/adhito-nugroho/nte-app.git"
 
 echo ======================================================
-echo  NTE ^| Monitoring NTE KTH — DEPLOY GIT PULL
+echo  NTE ^| Monitoring NTE KTH - DEPLOY GIT PULL
 echo  Repo : %REPO_URL%
 echo  Branch : %BRANCH%
 echo ======================================================
@@ -92,7 +92,7 @@ echo CATATAN: Folder uploads (arsip import) di server tidak akan diubah.
 echo.
 
 :: Path kode/aset yang di-deploy (uploads & vendor tidak termasuk).
-set "DEPLOY_PATHS=assets config.php footer.php header.php import.php import_target.php index.php laporan_penyuluh.php laporan_produk.php laporan_realisasi_penyuluh.php master_penyuluh.php merge_penyuluh.php target.php transaksi.php tests composer.json composer.lock deploy-git.bat .gitignore"
+set "DEPLOY_PATHS=assets config.php footer.php header.php import.php import_target.php index.php laporan_penyuluh.php laporan_produk.php laporan_realisasi_penyuluh.php master_penyuluh.php merge_penyuluh.php target.php transaksi.php tests composer.json composer.lock deploy-git.bat setup-server.bat .gitignore"
 
 :: Hapus index.lock, fetch, lalu checkout hanya path kode dari origin.
 ssh -p %SERVER_PORT% %SERVER_USER%@%SERVER_IP% "%REMOTE_GIT% config --global --add safe.directory %REMOTE_DIR:\=/% && %%SystemRoot%%\System32\attrib.exe -R -S -H %REMOTE_DIR%\.git\index >nul 2>nul & del /F /Q %REMOTE_DIR%\.git\index.lock >nul 2>nul & %REMOTE_GIT% -C %REMOTE_DIR% fetch origin %BRANCH% && %REMOTE_GIT% -C %REMOTE_DIR% read-tree HEAD && %REMOTE_GIT% -C %REMOTE_DIR% checkout origin/%BRANCH% -- %DEPLOY_PATHS% && %REMOTE_GIT% -C %REMOTE_DIR% update-ref refs/heads/%BRANCH% origin/%BRANCH%"
@@ -100,9 +100,9 @@ ssh -p %SERVER_PORT% %SERVER_USER%@%SERVER_IP% "%REMOTE_GIT% config --global --a
 if errorlevel 1 (
     echo.
     echo [ERROR] Deploy kode di server gagal.
-    echo Periksa pesan error di atas (mis. .git\index rusak atau file kode terkunci).
-    echo Jika folder server belum pernah di-clone, jalankan SEKALI:
-    echo    ssh -p %SERVER_PORT% %SERVER_USER%@%SERVER_IP% "%REMOTE_GIT% clone %REPO_URL% %REMOTE_DIR%"
+    echo Periksa pesan error di atas ^(mis. .git\index rusak atau file kode terkunci^).
+    echo Jika folder server belum pernah disiapkan sebagai repo Git, jalankan SEKALI:
+    echo    setup-server.bat
     pause
     exit /b 1
 )

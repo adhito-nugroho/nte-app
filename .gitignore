@@ -1,0 +1,10 @@
+# Arsip file import & upload pengguna (jangan ditimpa saat deploy)
+uploads/
+
+# Dependency Composer (pasang di tiap mesin via: composer install)
+/vendor/
+
+# Log & file sementara / cadangan
+*.log
+*.tmp
+*.bak
